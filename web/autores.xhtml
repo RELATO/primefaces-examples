@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Livraria</title>
+    </h:head>
+    <h:body>
+        <style>
+            .panelGridSemBorda tr, .panelGridSemBorda td {
+                border: none;
+            }
+            .dialogoSemScroll div.ui-dialog-content {
+                overflow: hidden;
+            }
+        </style>
+        <h:form prependId="false" id="frmPrincipal">
+            <p:outputPanel id="pnlTabela">                
+                <p:dataTable id="Tabela" 
+                             widgetVar="wTabela"
+                             rowIndexVar="rowNumber"
+                             rows="10"
+                             paginator="true"
+                             value="#{controlador.autores}"
+                             var="registro">
+                    <f:facet name="header">
+                        <h:outputText value="Autores"/>
+                        <p:toolbar>
+                            <p:toolbarGroup>
+                                <p:commandLink action="#{controlador.adicionar('AUTOR')}"
+                                               oncomplete="wdlgDetalhe.show()" 
+                                               update=":frmPrincipal:pnlDetalhe">
+                                    <p:graphicImage url="./resources/imagens/adicionar.png" 
+                                                    style="background-color: transparent; vertical-align: middle; border: none" 
+                                                    width="40" height="40"/>
+                                </p:commandLink>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                    <p:column headerText="Nome">
+                        #{registro.nome}
+                    </p:column>
+                    <p:column headerText="Sobrenome">
+                        #{registro.sobrenome}
+                    </p:column>
+                    <p:column width="60">
+                        <p:commandLink action="#{controlador.editar(registro)}" 
+                                       oncomplete="wdlgDetalhe.show()" 
+                                       update=":frmPrincipal:pnlDetalhe">
+                            <p:graphicImage url="./resources/imagens/editar.png" 
+                                            style="background-color: transparent; vertical-align: middle; border: none" 
+                                            width="20" height="20"/>
+                        </p:commandLink>
+                        <p:spacer width="10"/>
+                        <p:commandLink action="#{controlador.excluir(registro)}" 
+                                       update=":frmPrincipal:pnlTabela">
+                            <p:graphicImage url="./resources/imagens/excluir.png" 
+                                            style="background-color: transparent; vertical-align: middle; border: none" 
+                                            width="20" height="20"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </p:outputPanel>
+            <p:dialog id="dlgDetalhe" 
+                      widgetVar="wdlgDetalhe" 
+                      modal="true" 
+                      resizable="false" 
+                      closable="true" 
+                      header="Detalhes do autor" 
+                      styleClass="dialogoSemScroll" >
+                <p:panelGrid id="pnlDetalhe" 
+                             columns="1" 
+                             styleClass="panelGridSemBorda">
+                    <p:outputLabel value="Nome:" id="lNome" for="cNome" />
+                    <p:inputText id="cNome" value="#{controlador.autor.nome}"/>
+                    <p:outputLabel value="Sobrenome:" id="lSobrenome" for="cSobrenome" />
+                    <p:inputText id="cSobrenome" value="#{controlador.autor.sobrenome}"/>
+                    <f:facet name="footer">
+                        <p:toolbar>
+                            <p:toolbarGroup>
+                                <p:commandLink action="#{controlador.gravar(controlador.autor)}"
+                                               oncomplete="wdlgDetalhe.hide()" 
+                                               update=":frmPrincipal:pnlTabela">
+                                    <p:graphicImage url="./resources/imagens/gravar.png" 
+                                                    style="background-color: transparent; vertical-align: middle; border: none" 
+                                                    width="40" height="40"/>
+                                </p:commandLink>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

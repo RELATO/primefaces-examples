@@ -4,8 +4,8 @@ import entidades.Entidade;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component("facadeBD")
 @ManagedBean(name = "facadeBD")
-@ViewScoped
+@ApplicationScoped
 public class FacadeBD implements Serializable {
 
     public static final short SALVAR = 1;

@@ -4,8 +4,6 @@ import delegate.FacadeBD;
 import entidades.Entidade;
 import entidades.Autor;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -16,49 +14,32 @@ public class Controlador implements Serializable {
 
     @ManagedProperty(value = "#{facadeBD}")
     private FacadeBD facadeBD;
+    @ManagedProperty(value = "#{aplicacao}")
+    private Aplicacao aplicacao;
+    private Autor autor = new Autor();
 
     public Controlador() {
     }
 
-    public String listaGravada() {
-        String retorno = "";
-        List<Autor> la = facadeBD.listar(Autor.class);
-        retorno += "\n\nLista gravada:\n\n";
-        if (la != null) {
-            for (Autor autor : la) {
-                retorno += "("+autor.getId()+") "+autor.getNome() + "\n";
-            }
+    public void adicionar(String entidade) {
+        if (entidade.toUpperCase().equals("AUTOR")){
+            autor = new Autor();
         }
-        return retorno;
     }
 
-    public String getResultado() {
-        String retorno = "";
-        Autor autor1 = new Autor();
-        autor1.setNome("Stephen King");
-        Autor autor2 = new Autor();
-        autor2.setNome("Dan Brown");
-        List<Entidade> listaAutores = new ArrayList<Entidade>();
-        listaAutores.add(autor1);
-        listaAutores.add(autor2);
-        retorno += "\nInserindo dois autores\n";
-        facadeBD.salvarLista(listaAutores);
-        retorno += listaGravada();
-        autor1.setFlagRemover(Boolean.TRUE);
-        facadeBD.salvar(autor1);
-        retorno += "\nExcluindo ("+autor1.getId()+") "+autor1.getNome()+"\n";
-        retorno += listaGravada();
-        Autor autor3 = new Autor();
-        autor3.setNome("ray bradbury");
-        listaAutores.add(autor3);
-        retorno += "\nInserindo novo autor "+autor3.getNome()+"\n";
-        facadeBD.salvarLista(listaAutores);
-        retorno += listaGravada();
-        retorno += "\nAlterando "+autor3.getNome()+"\n";
-        autor3.setNome("Ray Bradbury");
-        facadeBD.salvarLista(listaAutores);
-        retorno += listaGravada();
-        return retorno;
+    public void editar(Entidade entidade) {
+        autor = (Autor) facadeBD.carregar(entidade.getClass(), entidade.getId());
+    }
+
+    public void gravar(Entidade entidade) {
+        aplicacao.atualizarNaLista(autor);
+        facadeBD.salvar(entidade);
+    }
+
+    public void excluir(Entidade entidade) {
+        entidade.setFlagRemover(true);
+        aplicacao.removerDaLista(entidade);
+        facadeBD.salvar(entidade);
     }
 
     public FacadeBD getFacadeBD() {
@@ -67,5 +48,21 @@ public class Controlador implements Serializable {
 
     public void setFacadeBD(FacadeBD facadeBD) {
         this.facadeBD = facadeBD;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public Aplicacao getAplicacao() {
+        return aplicacao;
+    }
+
+    public void setAplicacao(Aplicacao aplicacao) {
+        this.aplicacao = aplicacao;
     }
 }
