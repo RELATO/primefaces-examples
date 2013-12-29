@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component("facadeBD")
 @ManagedBean(name = "facadeBD")
-@ApplicationScoped
+@SessionScoped
 public class FacadeBD implements Serializable {
 
     public static final short SALVAR = 1;

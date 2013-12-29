@@ -9,9 +9,10 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "aplicacao")
-@ApplicationScoped
+@SessionScoped
 public class Aplicacao implements Serializable {
 
     public static Short ATUALIZAR = 1;
