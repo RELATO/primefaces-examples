@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jboss-web>
-  <context-root>/livraria</context-root>
-  <resource-ref>
-    <res-ref-name>jdbc/fonteDeDados</res-ref-name>
-    <jndi-name>java:/fonteDeDados</jndi-name>
-  </resource-ref>
-</jboss-web>
