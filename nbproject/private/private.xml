@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/configuracao/AppConfig.java</file>
             <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/delegate/FacadeBD.java</file>
-            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/delegate/GenericBD.java</file>
             <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/controle/Controlador.java</file>
             <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/controle/Aplicacao.java</file>
-            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/web/index.xhtml</file>
             <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/META-INF/persistence.xml</file>
-            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/web/autores.xhtml</file>
+            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/src/java/entidades/Livro.java</file>
+            <file>file:/C:/Users/Relato/Documents/NetBeansProjects/WebApplication1/web/livros.xhtml</file>
         </group>
     </open-files>
 </project-private>

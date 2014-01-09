@@ -23,13 +23,13 @@
                              rowIndexVar="rowNumber"
                              rows="10"
                              paginator="true"
-                             value="#{aplicacao.autores}"
+                             value="#{aplicacao.livros}"
                              var="registro">
                     <f:facet name="header">
-                        <h:outputText value="Autores"/>
+                        <h:outputText value="Livros"/>
                         <p:toolbar>
                             <p:toolbarGroup>
-                                <p:commandLink action="#{controlador.adicionar('AUTOR')}"
+                                <p:commandLink action="#{controlador.adicionar('LIVRO')}"
                                                oncomplete="wdlgDetalhe.show()"
                                                update=":frmPrincipal:pnlDetalhe">
                                     <p:graphicImage url="./resources/imagens/adicionar.png"
@@ -42,8 +42,8 @@
                     <p:column headerText="Nome">
                         #{registro.nome}
                     </p:column>
-                    <p:column headerText="Sobrenome">
-                        #{registro.sobrenome}
+                    <p:column headerText="Valor">
+                        #{registro.valor}
                     </p:column>
                     <p:column width="60">
                         <p:commandLink action="#{controlador.editar(registro)}"
@@ -68,19 +68,19 @@
                       modal="true"
                       resizable="false"
                       closable="false"
-                      header="Detalhes do autor"
+                      header="Detalhes do livro"
                       styleClass="dialogoSemScroll" >
                 <p:panelGrid id="pnlDetalhe"
                              columns="1"
                              styleClass="panelGridSemBorda">
                     <p:outputLabel value="Nome:" id="lNome" for="cNome" />
-                    <p:inputText id="cNome" value="#{controlador.autor.nome}"/>
-                    <p:outputLabel value="Sobrenome:" id="lSobrenome" for="cSobrenome" />
-                    <p:inputText id="cSobrenome" value="#{controlador.autor.sobrenome}"/>
+                    <p:inputText id="cNome" value="#{controlador.livro.nome}"/>
+                    <p:outputLabel value="Valor:" id="lSobrenome" for="nValor" />
+                    <p:inputText id="nValor" value="#{controlador.livro.valor}"/>
                     <f:facet name="footer">
                         <p:toolbar>
                             <p:toolbarGroup>
-                                <p:commandLink action="#{controlador.gravar(controlador.autor)}"
+                                <p:commandLink action="#{controlador.gravar(controlador.livro)}"
                                                oncomplete="wdlgDetalhe.hide()"
                                                update=":frmPrincipal:pnlTabela">
                                     <p:graphicImage url="./resources/imagens/gravar.png"

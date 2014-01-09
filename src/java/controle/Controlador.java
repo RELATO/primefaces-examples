@@ -3,6 +3,7 @@ package controle;
 import delegate.FacadeBD;
 import entidades.Entidade;
 import entidades.Autor;
+import entidades.Livro;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -17,22 +18,34 @@ public class Controlador implements Serializable {
     @ManagedProperty(value = "#{aplicacao}")
     private Aplicacao aplicacao;
     private Autor autor = new Autor();
+    private Livro livro = new Livro();
 
     public Controlador() {
     }
 
     public void adicionar(String entidade) {
-        if (entidade.toUpperCase().equals("AUTOR")){
+        if (entidade.toUpperCase().equals("AUTOR")) {
             autor = new Autor();
+        } else if (entidade.equalsIgnoreCase("LIVRO")) {
+            livro = new Livro();
         }
     }
 
     public void editar(Entidade entidade) {
-        autor = (Autor) facadeBD.carregar(entidade.getClass(), entidade.getId());
+        if (entidade.getClass().getSimpleName().equalsIgnoreCase("AUTOR")) {
+            autor = (Autor) facadeBD.carregar(entidade.getClass(), entidade.getId());
+        } else if (entidade.getClass().getSimpleName().equalsIgnoreCase("LIVRO")) {
+            livro = (Livro) facadeBD.carregar(entidade.getClass(), entidade.getId());
+        }
     }
 
     public void gravar(Entidade entidade) {
-        aplicacao.atualizarNaLista(autor);
+         if (entidade.getClass().getSimpleName().equalsIgnoreCase("AUTOR")) {
+            aplicacao.atualizarNaLista(autor);
+        } else if (entidade.getClass().getSimpleName().equalsIgnoreCase("LIVRO")) 
+            aplicacao.atualizarNaLista(livro);
+        
+        
         facadeBD.salvar(entidade);
     }
 
@@ -48,6 +61,14 @@ public class Controlador implements Serializable {
 
     public void setFacadeBD(FacadeBD facadeBD) {
         this.facadeBD = facadeBD;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
     }
 
     public Autor getAutor() {

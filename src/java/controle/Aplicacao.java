@@ -3,10 +3,10 @@ package controle;
 import delegate.FacadeBD;
 import entidades.Autor;
 import entidades.Entidade;
+import entidades.Livro;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -20,6 +20,7 @@ public class Aplicacao implements Serializable {
     @ManagedProperty(value = "#{facadeBD}")
     private FacadeBD facadeBD;
     private List<Autor> autores = new ArrayList<Autor>();
+     private List<Livro> livros = new ArrayList<Livro>();
 
     public Aplicacao() {
     }
@@ -34,6 +35,16 @@ public class Aplicacao implements Serializable {
     public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
+     public List<Livro> getLivros() {
+        if (livros.isEmpty()) {
+            livros = facadeBD.listar(Livro.class);
+        }
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
 
     public FacadeBD getFacadeBD() {
         return facadeBD;
@@ -47,6 +58,8 @@ public class Aplicacao implements Serializable {
         List l = null;
         if (e instanceof Autor) {
             l = autores;
+        } else if (e instanceof Livro) {
+            l = livros;
         }
         if (l != null) {
             if (e.getId() == null) {

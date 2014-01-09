@@ -40,6 +40,8 @@ public class AppConfig implements Serializable {
     public JndiObjectFactoryBean fonteDeDados() {
         JndiObjectFactoryBean bean = new JndiObjectFactoryBean();
         bean.setJndiName("java:comp/env/jdbc/fonteDeDados");
+        //bean.setJndiName("java:openejb/Resource/jdbc/fonteDeDados");
+       //bean.setJndiName("java:jdbc/fonteDeDados");
         return bean;
     }
 }
